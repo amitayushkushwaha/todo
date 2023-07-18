@@ -2,7 +2,7 @@
 
 const express = require("express");
 const bodyParser = require("body-parser");
-// const date = require(__dirname + "/date.js");
+
 const app = express();
 app.set("view engine", "ejs");
 
@@ -10,14 +10,14 @@ app.use(bodyParser.urlencoded({ extended: true }));
 app.use(express.static("public"));
 const mongoose = require("mongoose");
 const _ = require("lodash");
-// mongodb://127.0.0.1:27017
+
 main().catch((err) => console.log(err));
 async function main() {
   try {
     mongoose.connect(
       process.env.LINK,
       {
-        serverSelectionTimeoutMS: 5000, // if takes more then 5sec in connection then cancel it
+        serverSelectionTimeoutMS: 5000, 
       }
     );
   } catch (error) {
@@ -47,7 +47,7 @@ const listSchema = new mongoose.Schema({
 const List = mongoose.model("List", listSchema);
 
 app.get("/", function (req, res) {
-  // const day = date.getDate();
+
   Item.find()
     .then((items) => {
       if (items.length === 0) {
@@ -150,5 +150,5 @@ app.post("/delete", (req, res) => {
 });
 
 app.listen(3000|| process.env.PORT, function () {
-  console.log("Server started on port 3000");// edar ab kya krun git add 
+  console.log("Server started on port 3000");
 });
